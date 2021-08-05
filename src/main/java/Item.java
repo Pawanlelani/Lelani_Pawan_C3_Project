@@ -1,5 +1,8 @@
 public class Item {
     private String name;
+
+
+
     private int price;
 
     public Item(String name, int price) {
@@ -16,5 +19,13 @@ public class Item {
                 + price
                 + "\n"
                 ;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

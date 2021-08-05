@@ -92,4 +92,9 @@ public class Restaurant {
         return this.location;
     }
 
+    public int getCartTotalCost(List<Item> item){
+
+        return 0;
+    }
+
 }

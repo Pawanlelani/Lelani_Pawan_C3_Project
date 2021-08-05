@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.time.LocalTime;
 
@@ -7,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RestaurantTest {
     Restaurant restaurant;
+
+    List<Item> itemList = new ArrayList<Item>();
 
     public void createRestaurant(){
         LocalTime openingTime = LocalTime.parse("10:30:00");
@@ -58,6 +62,23 @@ class RestaurantTest {
 
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
+    }
+
+    @Test
+    public void order_value_should_get_cumulative_total_when_collection_of_items_selected(){
+        createRestaurant();
+        itemList = restaurant.getMenu();
+        assertEquals(388,restaurant.getCartTotalCost(itemList));
+    }
+
+    @Test
+    public void order_value_should_reduce_cumulative_total_when_an_item_removed(){
+        createRestaurant();
+        itemList= restaurant.getMenu();
+        int total = restaurant.getCartTotalCost(itemList);
+        int afterTotal = itemList.get(1).getPrice();
+        itemList.remove(1);
+        assertEquals(total-afterTotal,restaurant.getCartTotalCost(itemList));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
