@@ -93,8 +93,11 @@ public class Restaurant {
     }
 
     public int getCartTotalCost(List<Item> item){
-
-        return 0;
+        int totalCost = 0;
+        for (Item myItem : item) {
+            totalCost += myItem.getPrice();
+        }
+        return totalCost;
     }
 
 }
